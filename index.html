@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width">
+  <title>Meme generator</title>
+
+  <!-- add fontawesome-->
+  <script src="https://kit.fontawesome.com/c75226f30d.js" crossorigin="anonymous"></script>
+<style>
+
+</style>
+</head>
+<body onload="init()">
+    <header class="header">
+        <div class="container main-nav flex flex-align-center flex-space-between">
+            <div class="logo">Meme generator</div>
+            <ul class="main-nav-ul flex" >
+                <li><a class="link" href="#">Gallery</a></li>
+                <li><a class="link" href="#">Meme</a></li>
+                <li><a class="link" href="#">Share</a></li>
+            </ul>
+            <div class="menu-button" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </div>     
+</header>
+
+<gallery class="container">
+        <div class="images flex justify-content-center flex-wrap"></div>
+</gallery>
+
+<section>
+    <div class="canvas-container flex justify-content-center">
+        <canvas id="canvas-meme" width="750" height="500"  onclick="draw(event)" ></canvas>
+        <div class="actions flex flex-direction-column">         
+            <input class="input input-txt-first" data-inputid="" name="input-txt-first" value="some txt" placeHolder="some txt" />
+            <input class="input input-txt-second" data-inputid="" name="input-txt-second" value="some txt" placeHolder="some txt" />
+            <div class="ButtonsFontSize flex">
+                <button onclick="onIncreaseFontSize(1)"><i class="fas fa-plus"></i></button>
+                <button onclick="onDecreaseFontSize(-1)"><i class="fas fa-minus"></i></button>
+                <button onclick="onTxtUp()"><i class="fas fa-arrow-up"></i></button>
+                <button onclick="onTxtDown()"><i class="fas fa-arrow-down"></i></button>
+                <button onclick="onSwitchLines()"><i class="fas fa-arrows-alt-v"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer flex flex-direction-column flex-align-center">
+    <div class="logo">Meme generator</div>
+    <p>By Harel Weingarten</p>
+    <ul class="nav-link flex">
+        <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-twitter"></i></i></a></li>
+        <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-twitter"></i></i></a></li>
+    </ul>
+</footer>
+
+<script src="js/util-service.js"></script>
+<script src="js/storage-service.js"></script>
+<script src="js/meme-service.js"></script>
+<script src="js/meme-controller.js"></script>
+</body>
+</html>
