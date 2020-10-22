@@ -4,6 +4,13 @@
     src: url(../fonts/impact.ttf);
   }
 
+@font-face {
+    font-family: georgia;
+    src: url(../fonts/georgia.ttf);
+  }
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* add animations */
@@ -117,7 +124,17 @@ button , a {
     padding: 2% 0;
 }
 
+.logo img{
+    width: 210px;
+    height: auto;
+}
+
 /* gallery */
+
+.gallery{
+    margin-top:10px
+}
+
 .images {
     display: flex;
 }
@@ -132,8 +149,43 @@ img.imgMemeGallery {
     border: 1px solid #292929;
 }
 
+navigation{
+    margin: 30px 0;
+}
+
+.previus , .next{
+    cursor: pointer;
+    padding: 10px 30px;
+    background: #efefef;
+    border-bottom: 1px solid #DEDEDE;
+}
+
 /* canvas */
-#canvas-meme{
+.canvas-container{  
+    flex-direction: column;
+}
+
+.canvas{
+    position: relative;
+    width: 95%;
+    max-width: 750px;
+    height: 500px;
+}
+
+.canvas-meme{
+    position: absolute;
+    width: 100%;
+    background: #dedede;
+    border: 1px solid #000;
+}
+
+.canvasSaved{
+    padding: 0 10px;
+}
+
+.canvasSavedMeme{
+    
+    width: 100%;
     background: #dedede;
     border: 1px solid #000;
 }
@@ -141,7 +193,12 @@ img.imgMemeGallery {
 /* actions */
 .actions{
     padding: 0 10px;
-    width: 50%;
+    width: 100%;
+    max-width: 750px;
+}
+
+input{
+    font-family: 'Roboto', sans-serif;
 }
 
 .actions .input{
@@ -150,19 +207,81 @@ img.imgMemeGallery {
     border: 1px solid #fff;
     border-bottom: 1px solid #DEDEDE;
     height: 50px;
+    margin: 10px 0;
+}
+
+.actions .input.fb ,.actions .input.save{
+    width:100%;
+}
+
+.actions h2{
+    color: #727272;
+    font-size: 1.5em;
 }
 
 .ButtonsFontSize{
-
+    margin: 10px 0 0 0 ;
+    flex-wrap: wrap;
 }
 
 .ButtonsFontSize button{
-    margin: 0 10px 0 0;
-    background: aliceblue;
+    font-family: georgia;
+    margin: 0px 10px 10px 0;
+    background: white;
     text-align: center;
-    padding: 10px;
-    border: 1px solid #666;
+    padding: 8px 0;
+    border: 1px solid #fff;
+    font-size: 1em;
+    display: flex;
+    color: #727272;
+    min-width: 20px;
 }
+
+.buttonPlus i , .buttonMinus i{
+    font-size: 0.5em;
+}
+
+button.addLine{
+    font-size: 1.4em;
+}
+
+.line-seperation{
+    height: 40px;
+    border-left: 1px solid #888;
+    padding: 0 5px;
+}
+
+input.color-text {
+    height: 40px;
+    margin: 0 5px;
+    background: white;
+    padding: 0;
+    border: 1px solid #fff;
+}
+
+.selectFont {
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 2px;
+    height: 40px;
+    padding: 0 30px 0 10px;
+    margin-right: 10px;
+    font-size: 12px;
+    font-size: 0.75em;
+    color: #989898;
+}
+
+input.inputSearch {
+    padding: 10px;
+    font-size: 1em;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 81px;
+    width: 96%;
+    margin: 0 auto;
+}
+
 /* footer */
 footer{
     background-color: #f8f8f8;
@@ -220,6 +339,10 @@ footer ul li:hover{
     align-items: flex-start;
 }
 
+.justify-content-start{
+    justify-content: start;
+}
+ 
 .justify-content-center{
     justify-content: center;
 }
@@ -244,7 +367,8 @@ footer ul li:hover{
 @media only screen and (min-width: 720px) {
     .container {
         max-width: 660px;
-        margin: 0 auto;
+        margin: 10px auto 0 auto;
+        
     }
 
     .main-nav-ul{
@@ -256,11 +380,13 @@ footer ul li:hover{
         flex-direction: row;
     }
   
-
     footer p {
         padding: 32px 0 0 0;
     }
 
+    .ButtonsFontSize{
+        flex-wrap: wrap; 
+    }
 }
 
 @media only screen and (min-width: 920px) {
@@ -268,12 +394,47 @@ footer ul li:hover{
         max-width: 860px;
         margin: 0 auto;
     }
+    
+    .gallery{
+        margin-top:10px
+    }
+
 }
 
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 1010px) {
     .container {
         max-width: 980px;
     }
+
+    .gallery{
+        margin-top:10px
+    }
+
+    .canvas-container{
+        flex-direction: row;
+    }
+
+    .canvas{
+        position: relative;
+        width: 50%;
+        max-width: 750px;
+        height: 500px;
+    }
+
+    .actions{
+        padding: 0 10px;
+        width: 50%;
+        max-width: 550px;
+        align-self: self-end;
+    }
+
+    .savedMemes .memes .canvasSaved{
+        position: relative;
+        width: 25%;
+        max-width: 250px;
+        height: 250px;
+    }
+
 }
 
 @media only screen and (max-width: 720px) {

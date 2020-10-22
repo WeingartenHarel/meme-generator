@@ -14,35 +14,85 @@
 <body onload="init()">
     <header class="header">
         <div class="container main-nav flex flex-align-center flex-space-between">
-            <div class="logo">Meme generator</div>
+            <div class="logo"><img src="img/logo.jpg"></div>
             <ul class="main-nav-ul flex" >
                 <li><a class="link" href="#">Gallery</a></li>
-                <li><a class="link" href="#">Meme</a></li>
-                <li><a class="link" href="#">Share</a></li>
+                <li><a class="link" href="#">Editor</a></li>
+                <li><a class="link" href="#">Archive</a></li>
             </ul>
             <div class="menu-button" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         </div>     
 </header>
 
-<gallery class="container">
+<gallery class="container gallery flex flex-direction-column flex-align-center">
+        <input class="inputSearch" placeholder="Search...." value=""/>
         <div class="images flex justify-content-center flex-wrap"></div>
 </gallery>
-
+<main class="container">
+    <navigation class="flex flex-space-between">
+        <a class="previus" onclick="onPrevPage()"> <i class="fas fa-arrow-left"></i> previus</a>
+        <a class="next" onclick="onNextPage()"> next <i class="fas fa-arrow-right"></i></a>
+    </navigation>
+</main>
 <section>
-    <div class="canvas-container flex justify-content-center">
-        <canvas id="canvas-meme" width="750" height="500"  onclick="draw(event)" ></canvas>
-        <div class="actions flex flex-direction-column">         
-            <input class="input input-txt-first" data-inputid="" name="input-txt-first" value="some txt" placeHolder="some txt" />
-            <input class="input input-txt-second" data-inputid="" name="input-txt-second" value="some txt" placeHolder="some txt" />
-            <div class="ButtonsFontSize flex">
-                <button onclick="onIncreaseFontSize(1)"><i class="fas fa-plus"></i></button>
-                <button onclick="onDecreaseFontSize(-1)"><i class="fas fa-minus"></i></button>
-                <button onclick="onTxtUp()"><i class="fas fa-arrow-up"></i></button>
-                <button onclick="onTxtDown()"><i class="fas fa-arrow-down"></i></button>
-                <button onclick="onSwitchLines()"><i class="fas fa-arrows-alt-v"></i></button>
+    <div class="canvas-container flex justify-content-center flex-align-center">
+            <div class="canvas"> 
+                <canvas id="canvas-meme" class="canvas-meme" width="750" height="500"></canvas>
+            </div>          
+        <div class="actions flex flex-direction-column">
+            <div class="actions-header flex flex-direction-row flex-space-between">
+                <h2>Edit Text Lines</h2> 
+                <div class="ButtonsFontSize flex">
+                    <button onclick="onSwitchLines()"><i class="fas fa-arrows-alt-v"></i></button>
+                    <button onclick="onAddLine()" class="addLine"><i class="far fa-plus-square"></i></button>
+                </div>
+            </div>   
+            <div class="ButtonsFontSize flex justify-content-start">
+                <div class="flex">
+                    <select class="selectFont" onchange="onSelectFont(this.value)">
+                        <option value="undefined">Select Font...</option>
+                        <option value="Arial">Arial</option>
+                        <option value="georgia">georgia</option>
+                        <option value="impact">impact</option>
+                    </select>
+                    <button class="buttonPlus" onclick="onIncreaseFontSize(1)">A<i class="fas fa-plus"></i></button>
+                    <button class="buttonMinus" onclick="onDecreaseFontSize(-1)">A<i class="fas fa-minus"></i></button>
+                    <span class="line-seperation"></span>
+                </div> 
+
+                <div class="flex">
+                    <button onclick="onTextAlign('right')"><i class="fas fa-align-left"></i></i></button>
+                    <button onclick="onTextAlign('center')"><i class="fas fa-align-center"></i></i></button>
+                    <button onclick="onTextAlign('left')"><i class="fas fa-align-right"></i></i></button>
+                    <span class="line-seperation"></span>
+                </div>
+
+                <div class="flex">
+                    <input onchange="onSelectColor(this.value)" type="color" class="color-text" name="color-text" value="#000000">
+                    <input onchange="onSelectColorStroke(this.value)" type="color" class="color-text" name="color-text-stroke" value="#ffffff">
+                    <button onclick="onTxtUp()"><i class="fas fa-arrow-up"></i></button>
+                    <button onclick="onTxtDown()"><i class="fas fa-arrow-down"></i></button>
+                 </div>
+            </div>
+            <div class="inputs flex flex-direction-column">        
+                <input class="input input-txt-first" data-inputid="" name="input-txt-first" value="some txt" placeHolder="some txt" />
+                <input class="input input-txt-second" data-inputid="" name="input-txt-second" value="some txt" placeHolder="some txt" />
+            </div>
+            <div class="save flex flex-direction-column">  
+                <button class="input" onclick="onSaveMeme()">Save Meme <i class="fas fa-cloud-upload-alt"></i></button>
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden"/> 
+                    <button class="input fb" type="submit" >Share Meme <i class="fab fa-facebook-square"></i></button>
+                    <button class="input save" href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg <i class="fas fa-save"></i></button>
+                </form>
             </div>
         </div>
     </div>
+</section>
+
+<section class="savedMemes container ">
+    <h2>Saved Memes</h2>
+    <div class="memes flex">Saved Memes here...</div>
 </section>
 
 <footer class="footer flex flex-direction-column flex-align-center">
@@ -58,6 +108,7 @@
 
 <script src="js/util-service.js"></script>
 <script src="js/storage-service.js"></script>
+<script src="js/upload-service.js"></script>
 <script src="js/meme-service.js"></script>
 <script src="js/meme-controller.js"></script>
 </body>
