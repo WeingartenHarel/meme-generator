@@ -2,6 +2,7 @@
 console.log('storage')
 
 function saveToStorage(key, val) {
+    console.log(val)
     localStorage.setItem(key, JSON.stringify(val))
 }
 

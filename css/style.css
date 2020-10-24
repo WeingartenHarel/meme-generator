@@ -12,10 +12,14 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+/* hebrew font*/
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* add animations */
 html{
-    
+    scroll-behavior: smooth;
 }
 
 :root{
@@ -30,6 +34,14 @@ html{
     /* transition: 1s ease-in-out; */
 }
 
+.direction-rtl{
+    direction:rtl;
+}
+
+.direction-ltr {
+    direction: ltr;
+}
+
 body{
     display: block;
     margin: 0;
@@ -42,6 +54,11 @@ body{
 .header{
     background-color: #ffffff;
     border-bottom: 1px solid #888;
+
+    /* sticky header */
+    position: sticky;
+    top: 0px;
+    z-index: 99;
 }
 
 .container{
@@ -69,11 +86,11 @@ button , a {
     visibility: hidden;
     display: none;
     font-size: 1.625rem;
-    color: #fff;
+    color: #c31819;
 }
 
 .menu-button:hover{
-    color: #58c93a;
+    color: #000;
 }
 
 .screen{
@@ -81,7 +98,7 @@ button , a {
     opacity: 0;
     background: #0000005e;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     z-index: 99;
     transition: 1s ease-in-out;
@@ -96,6 +113,7 @@ button , a {
 
 .main-nav-ul li{
     list-style-type: none;
+    display: flex;
 }
 
 .main-nav-ul li:last-of-type{
@@ -104,15 +122,77 @@ button , a {
 
 .main-nav-ul li a.link {
     font-weight: 500;
-    color: #989898;
+    color: #c31819;
     text-decoration: none;
     padding: 1em 1.6em;
     font-size: 1em;
-   
+    text-shadow: 1px 1px #fff; 
 }
 
 .main-nav-ul li a.link:hover{  
     color: #3a80c9;
+}
+
+.main-nav-ul li .langSelect{
+    font-weight: 500;
+    color: #989898;
+    text-decoration: none;
+    font-size: 1em;
+    border: 1px solid #fff;
+    outline: none;
+}
+.main-nav-ul li option{
+    border: 1px solid #989898;
+    color: #989898; 
+}
+
+
+/* dropdown */
+.dropdown{ 
+    position: relative;
+    display: inline;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    align-items: center;
+  }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 4px 6px;
+    z-index: 1;
+    border-bottom: 1px #fff solid;
+    background: #c31819;
+}
+  
+.dropdown a{
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    padding: 3px 0;
+    font-size: 1em;
+    padding-inline-start: 30px;
+}
+
+.dropdown:hover a.link{
+    color: #000
+}
+
+.dropdown-content li{
+    padding: 5px 0;
+}
+
+.dropdown-content li a:hover{
+    color: #000
+}
+
+/*.dropdown-content display for mobile only */
+.drop-down-open .dropdown:hover .dropdown-content{
+    display: block;
 }
 
 /* logo */
@@ -140,13 +220,20 @@ button , a {
 }
 
 img.imgMemeGallery {
-    display: inline-block;
+    display: block;
     background: #292929;
     margin: 10px;
-    max-width: 300px;
-    height: auto;
     border-radius: 10px;
-    border: 1px solid #292929;
+    width: auto;
+    width: 300px;
+    height: auto;
+    max-width: 300px;
+    max-height: 225px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    -webkit-box-shadow: 0px 2px 16px 5px rgba(0,0,0,0.33); 
+    box-shadow: 0px 2px 16px 5px rgba(0,0,0,0.33);
 }
 
 navigation{
@@ -158,11 +245,24 @@ navigation{
     padding: 10px 30px;
     background: #efefef;
     border-bottom: 1px solid #DEDEDE;
+    text-shadow: 1px 1px #fff;
 }
 
+.gallery .actions{
+    width:100%;
+    flex-direction: column;
+}
+
+.tags{
+    padding: 0 10px;
+}
+.tags .tag{
+    padding: 0 10px;
+}
 /* canvas */
 .canvas-container{  
     flex-direction: column;
+    padding: 10px;
 }
 
 .canvas{
@@ -179,6 +279,12 @@ navigation{
     border: 1px solid #000;
 }
 
+.canvas-input-txt {
+    position: relative;
+    background: #00000000;
+    border: 0px solid #000;
+}
+
 .canvasSaved{
     padding: 0 10px;
 }
@@ -190,8 +296,9 @@ navigation{
     border: 1px solid #000;
 }
 
+
 /* actions */
-.actions{
+.canvas-container .actions{
     padding: 0 10px;
     width: 100%;
     max-width: 750px;
@@ -201,20 +308,32 @@ input{
     font-family: 'Roboto', sans-serif;
 }
 
-.actions .input{
+.canvas-container .actions .input ,.canvas-container .actions .input:visited  {
+    display: block;
+    background: #efefef;
+    text-decoration: none;
+    text-align: center;
+
+    color:#000;
     font-size: 1em;
     padding: 10px 20px;
     border: 1px solid #fff;
     border-bottom: 1px solid #DEDEDE;
     height: 50px;
+    line-height: 25px;
     margin: 10px 0;
+    text-shadow: 1px 1px #fff;
 }
 
-.actions .input.fb ,.actions .input.save{
+.canvas-container .actions .input i , .uploadFileLabel i{
+    margin: 0 5px;
+    
+}
+.canvas-container .actions .input.fb ,.actions .input.save{
     width:100%;
 }
 
-.actions h2{
+.canvas-container .actions h2{
     color: #727272;
     font-size: 1.5em;
 }
@@ -280,6 +399,75 @@ input.inputSearch {
     border-radius: 81px;
     width: 96%;
     margin: 0 auto;
+}
+
+input.file-input{
+    background: #efefef;
+}
+
+.stickers-container {
+    margin: 10px 0;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input{
+    visibility: hidden;
+    display: none;
+}
+
+/*
+.!custom-file-input::before {
+
+    content: 'Upload';
+    display: inline-block;
+    background: #efefef;
+    border-radius: 3px;
+    border-bottom: 1px solid #dedede;
+    padding: 10px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 100;
+    font-size: 1.2em;
+}
+*/
+.uploadFileLabel{
+    display: inline-block;
+    background: #efefef;
+    border-radius: 3px;
+    border-bottom: 1px solid #dedede;
+    padding: 13px 8px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 100;
+    font-size: 1em;
+    text-align: center;
+}
+
+.custom-file-input:hover::before {
+border-color: black;
+}
+
+.custom-file-input:active::before {
+background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+img.emoji{
+    width:40px;
+    height: auto;
+}
+
+/* saved memes */
+
+.savedMemes .memes{
+    flex-wrap: wrap;
 }
 
 /* footer */
@@ -359,6 +547,10 @@ footer ul li:hover{
     align-self: start;
 }
 
+.align-self-center{
+    align-self: center;
+}
+
 .flex-wrap{
     flex-wrap: wrap;
 }
@@ -366,7 +558,7 @@ footer ul li:hover{
 
 @media only screen and (min-width: 720px) {
     .container {
-        max-width: 660px;
+        max-width: 620px;
         margin: 10px auto 0 auto;
         
     }
@@ -387,11 +579,29 @@ footer ul li:hover{
     .ButtonsFontSize{
         flex-wrap: wrap; 
     }
+
+    /* hide mobile screen on desktop */
+    .screen{
+        visibility: hidden;
+    }
+    .menu-open .screen{
+        visibility: hidden;
+    }
+
+    /*.dropdown-content display for desktop only */
+    .dropdown:hover .dropdown-content{
+        display: block;
+        position: absolute;
+    }
+
+    .savedMemes .memes{
+        flex-wrap: nowrap;
+    }
 }
 
 @media only screen and (min-width: 920px) {
     .container {
-        max-width: 860px;
+        max-width: 700px;
         margin: 0 auto;
     }
     
@@ -401,9 +611,21 @@ footer ul li:hover{
 
 }
 
-@media only screen and (min-width: 1010px) {
+@media only screen and (min-width: 1020px) {
     .container {
-        max-width: 980px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .gallery{
+        margin-top:10px
+    }
+
+}
+
+@media only screen and (min-width: 1100px) {
+    .container {
+        max-width: 1000px;
     }
 
     .gallery{
@@ -421,12 +643,14 @@ footer ul li:hover{
         height: 500px;
     }
 
-    .actions{
+    .canvas-container .actions{
         padding: 0 10px;
         width: 50%;
         max-width: 550px;
         align-self: self-end;
     }
+
+
 
     .savedMemes .memes .canvasSaved{
         position: relative;
@@ -437,15 +661,18 @@ footer ul li:hover{
 
 }
 
+@media only screen and (min-width: 1210px) {
+    .container {
+        max-width: 1110px;
+    }
+}
 @media only screen and (max-width: 720px) {
-
-
     .main-nav-ul {
         flex-direction: column;
         position: fixed;
         right: 0;
         top: 0;
-        background: #828282e0;
+        background: #eaeaea;
         width: 100%;
         max-width: 0px;
         margin: 0;
@@ -455,11 +682,12 @@ footer ul li:hover{
     }
 
     .main-nav-ul li a.link {
-        display: block;
-        padding: 20px 0px;
-        text-align: center;
+        display: block; 
+        padding: 10px 40px;
         border-bottom: 1px #fff solid;
+        width: 100%;
     }
+
     .menu-button {
         visibility: visible;
         display: block; 
