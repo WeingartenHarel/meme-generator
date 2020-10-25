@@ -3,21 +3,14 @@ function initUpload(){
     gCtx = gCanvas.getContext('2d');
 }
 
-//function renderCanvas(img) {
-//    console.log('renderCanvas')
-//    gCanvas.width = img.width;
-//    gCanvas.height = img.height;
-//    gCtx.drawImage(img, 0, 0);
-//    // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-//}
-
 function onImgInput(ev) {
     console.log('upload',ev)
     loadImageFromInput(ev, renderCanvas)
+
 }
 function loadImageFromInput(ev, onImageReady) {
     console.log('upload',ev,onImageReady)
-    document.querySelector('.share-container').innerHTML = ''
+    document.querySelector('.share-container').innerHTML = '';
     var reader = new FileReader();
     
     reader.onload = function (event) {
@@ -32,8 +25,7 @@ function loadImageFromInput(ev, onImageReady) {
 
 function downloadImg(elLink) {
     console.log(gCanvas);
-    confirm("Download Meme....?")
-    if(!gCanvas) return;
+    if(!confirm("Download Meme....?")) return;
     var imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent
 }

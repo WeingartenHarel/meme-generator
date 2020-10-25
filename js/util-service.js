@@ -1,8 +1,6 @@
 'use strict';
 console.log('util')
 
-console.log('util ,',stringSplit('Hello world') )
-
 function getFileName(fileNameFull) {
         var fileNameSplit = fileNameFull.split(".");
         var fileName = fileNameSplit[0];

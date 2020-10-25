@@ -1,0 +1,26 @@
+
+html{
+    scroll-behavior: smooth;
+}
+
+:root{
+    --text-color: #4f4e4e;
+
+}
+
+
+* {
+    box-sizing: border-box;
+    /* transition: all 1s ease-in-out; */
+    /* transition: 1s ease-in-out; */
+}
+
+
+body{
+    display: block;
+    margin: 0;
+    font-size:16px;
+    /*font-size: calc(16px + 2 * ((100vw - 320px) / 980)); remove*/ 
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}

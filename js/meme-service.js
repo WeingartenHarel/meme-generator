@@ -1,38 +1,8 @@
 'use strict';
-console.log('gallery service')
+console.log('memes service')
 
-const PAGE_SIZE = 10;
-let gPageIdx = 0;
 const STORAGE_MEMES_KEY = 'memesDB'
 var gMemes = getSavedMemes();
-
-const gImages = [
-    {id: 1, url: 'img/1.jpg', keywords: ['trump' , 'politic']},
-    {id: 2, url: 'img/2.jpg', keywords: ['baby' , 'funny' ]},
-    {id: 3, url: 'img/3.jpg', keywords: ['tv', 'know' ]},
-    {id: 4, url: 'img/4.jpg', keywords: ['tv', 'quets','austin','film' ]},
-    {id: 5, url: 'img/5.jpg', keywords: ['happy', 'smile', 'politic','obama']},
-    {id: 6, url: 'img/6.jpg', keywords: ['hug' , 'kiss','sport']},
-    {id: 7, url: 'img/7.jpg', keywords: ['kids','dance','happy']},
-    {id: 8, url: 'img/8.jpg', keywords: ['trump' , 'politic' ]},
-    {id: 9, url: 'img/9.jpg', keywords: ['happy','baby','smile','suprise']},
-    {id: 10, url: 'img/10.jpg', keywords: ['happy' , 'dog' , 'funny']},
-    {id: 11, url: 'img/11.jpg', keywords: ['happy','cheers','smile','celeb','leo']},
-    {id: 12, url: 'img/12.jpg', keywords: ['dog' , 'animal','smile']},
-    {id: 13, url: 'img/13.jpg', keywords: ['matrix', 'movie']},
-    {id: 14, url: 'img/14.jpg', keywords: ['movie']},
-    {id: 15, url: 'img/15.jpg', keywords: ['tv','show','oprah']},
-    {id: 16, url: 'img/16.jpg', keywords: ['movie','startrek']},
-    {id: 17, url: 'img/17.jpg', keywords: ['politics', 'russia']},
-    {id: 18, url: 'img/18.jpg', keywords: ['movie','toy']},
-    {id: 19, url: 'img/19.jpg', keywords: ['dog' , 'sleep','baby' , 'animal']},
-    {id: 20, url: 'img/20.jpg', keywords: ['cat', 'animal','computer']},
-    {id: 21, url: 'img/21.jpg', keywords: ['tv','show', 'point']},
-    {id: 22, url: 'img/22.jpg', keywords: ['tv','show','reality']},
-    {id: 23, url: 'img/23.jpg', keywords: ['movie','']},
-    {id: 24, url: 'img/24.jpg', keywords: ['baby', 'win']},
-    {id: 25, url: 'img/25.jpg', keywords: ['movie','smile']},
-];
 
 const gEmojis = [
     {id: 1, url: 'img/emoji/emoji1.gif'},
@@ -52,7 +22,7 @@ const gEmojis = [
 
 
 var gMeme = {
-    selectedImgId: undefined,
+    selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [
         {
@@ -84,59 +54,7 @@ var gMeme = {
 };
 
 
-function getImgesByFilter() {
-    if (gFilterBy === 'ALL') return gImages;
-    var res = []
-    gImages.forEach(function(image){
-        //console.log(image);
-        //console.log(gFilterBy);
-        
-        image.keywords.filter(function(keyword){
-            //console.log(keyword);
-            if(keyword === gFilterBy){
-                res.push(image)     
-            }
-        })
-        
-    })
-    //console.log(res)
-    return res;
-}
-
-function setFilter(filterBy) {
-    gFilterBy = filterBy;
-}
-
-function getAllKeywords(){
-    var images = getGImages()
-    var tags = getAllTags(images);
-    var tagsMaped =  mapArrayToValueCount(tags)
-
-    return tagsMaped
-}
-
-function getAllTags(images){ //ok
-    var tags =[]
-    images.forEach((image) => {
-        //console.log(image)
-        image.keywords.forEach((tag) => {
-            //console.log(tag)
-            tags.push(tag)
-        });
-    });
-    return tags
-}
-
-function mapArrayToValueCount(array){
-    var counts = array.reduce(function (acc, tag) { //ok
-        // console.log('Called with ', acc, tag);
-        if (!acc[tag]) acc[tag] = 0;
-        acc[tag]++
-        return acc;
-    }, {})
-    return counts
-}
-
+// set functions
 function updateGMemeFromSaved(index){ //ok
     var savedMemes = getSavedMemes();
     var selectMeme = savedMemes[index];
@@ -152,7 +70,7 @@ function addSticker(src){ //ok
     //console.log(sticker)
 }
  
-function saveMeme(){  //
+function saveMeme(){  // ok
     var meme = getGMeme();
     var clone = JSON.parse(JSON.stringify(meme));
     //console.log(result)
@@ -169,19 +87,6 @@ function updateMemesPositionCenter(canvas){ //ok
     });
     lines[0].y = 30;
     lines[1].y = canvas.height-20;
-}
-
-function filterGallery(searchTag){ //ok
-    var images = getGImages()
-    var results=[];
-    images.map((image,indexImage) => {
-        image.keywords.find((tag,indexTag) => {
-            if(tag === searchTag){
-                results.push(images[indexImage]);
-            }
-        });  
-    });
-    return results   
 }
 
 function addLine(){ // ok
@@ -228,8 +133,7 @@ function setSelectedLine(){ //ok
 }
 
 function setSelectedLineIdx(index){ //ok
-    var meme = getGMeme();
-    return meme.selectedLineIdx = index;
+    gMeme.selectedLineIdx = index;
 }
 
 /* set meme initial font size */
@@ -242,9 +146,9 @@ function setMemesFontSize(){ //not in use font size taken from modal
 
 function changeTxtPosition(isUP,inputId){ //ok
     var meme = getGMeme();
-    var lineInx = inputId;
+    var lineInx = meme.selectedLineIdx;
     var diff = 10;
-    (isUP) ? meme.lines[lineInx].y -= diff : meme.lines[lineInx].y += diff;
+    (isUP) ? gMeme.lines[lineInx].y -= diff : meme.lines[lineInx].y += diff;
 }
 
 function changeFontSizeInceace(){ //ok
@@ -297,8 +201,6 @@ function nextPage() { //ok
 }
 
 // get functions
-
-
 function getEmojis(){ //ok
     return gEmojis;
 }
@@ -376,40 +278,8 @@ function getGMemes(){ //ok
 }
 
 function getGMeme(){ //ok
-    let meme = gMeme
+    var meme = gMeme
     return meme
-}
-
-function getGImages(){ //ok
-    let images = gImages
-    return images
-}
-
-function getImageUrl(){ //ok
-    const image = getImageById(gMeme.selectedImgId)
-    return image.url;
-}
-
-function getImage(imageId){  //ok
-    const image = getImageById(imageId)
-    return image;
-}
-
-function getImageById(imageId) { //ok
-    return gImages.find(image => imageId === image.id);
-}
-
-function getImageIdx(imageId) { // not in use error on server sync
-    var imageIndex = gImages.findIndex(function (image) {
-        return imageId === image.id
-    })
-    return imageIndex
-}
-
-function getImages() { //ok
-    var fromIdx = gPageIdx * PAGE_SIZE;  
-    return gImages.slice(fromIdx, fromIdx + PAGE_SIZE)
-   
 }
 
 function _createSticker(src){

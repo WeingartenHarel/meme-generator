@@ -71,6 +71,10 @@ var gTrans = {
         en: 'Select Font',
         he: 'בחר פונט',
     },
+    moreTags: {
+        en: 'More Tags',
+        he: 'עוד תגיות',
+    },
     share: {
         en: 'Share',
         he: 'שתף',
@@ -95,20 +99,14 @@ var gTrans = {
         en: 'search',
         he: 'חיפוש',
     },
-    'filter-all': {
+    'all': {
         en: 'All',
         he: 'הכל',
     },
-    'filter-active': {
+    'active': {
         en: 'Active',
-        es: 'Activo',
         he: 'פעיל'
     },
-    'stat-active-label': {
-        en: 'Active',
-        he: 'פעיל',
-    },
-
 }
 
 var gCurrLang = 'en'

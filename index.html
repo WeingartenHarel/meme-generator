@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="viewport" content="initial-scale=1.0, width=device-width">
-  <title>Meme generator</title>
-  <!-- show hebrew font-->
-  <meta charset="UTF-8">
-  <!-- add fontawesome-->
-  <script src="https://kit.fontawesome.com/c75226f30d.js" crossorigin="anonymous"></script>
-<style>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <title>Meme generator</title>
+    <!-- show hebrew font-->
+    <meta charset="UTF-8">
+    <!-- add fontawesome-->
+    <script src="https://kit.fontawesome.com/c75226f30d.js" crossorigin="anonymous"></script>
 
-</style>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/helpers.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
+
 <body onload="init()">
     <header class="header">
         <div class="container main-nav flex flex-align-center flex-space-between">
-            <div class="logo"><img src="img/logo.svg"></div>
+            <div class="logo bounce-in-top"><img src="img/logo.svg"></div>
             <div class="screen" onclick="toggleMenu()"></div>
             <ul class="main-nav-ul flex" >
-                <li><a class="link" href="#galleryMain" data-trans="gallery">Gallery</a></li>
-                <li><a class="link" href="#editMain" data-trans="editor">Editor</a></li>
-                <li><a class="link" href="#savedMain" data-trans="memes">Memes</a></li>
-                
-                <!--<li>
-                    <select type="hidden" id="langSelect" class="langSelect" onchange="onCHangeLang(this.value)">                      
-                        <option value="" selected data-trans="selectLang">Select language</option>
-                        <option value="en">English</option>
-                        <option value="he">עברית</option>
-                    </select>
-                </li> -->
-
+                <li><a class="link galleryLink" onclick="windowLocation('galleryPage','galleryLink')" data-trans="gallery">Gallery</a></li>
+                <li><a class="link editorLink" onclick="windowLocation('editPage','editorLink')" data-trans="editor">Editor</a></li>
+                <li><a class="link memesLink"  onclick="windowLocation('memesPage','memesLink')" data-trans="memes">Memes</a></li>
                 <li>
                     <div class="dropdown flex flex-direction-column"> 
                     <a class="link dropdown" onclick="toggleDropDown()" href="#" data-trans="selectLang">Select language</a>               
@@ -43,31 +38,39 @@
             <div class="menu-button" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         </div>     
     </header>
-
-    <gallery id="galleryMain" class="container gallery flex flex-direction-column flex-align-center">
+  
+    <div class="test"></div>
+    <gallery id="galleryPage" class="container gallery flex flex-direction-column flex-align-center">
+            <h2 class="h2PageTitle" data-trans="gallery">Gallery</h2>
             <div class="actions flex">    
-                <input class="inputSearch align-self-center" data-trans="search" placeholder="Search...." value=""/>
-                <div class="tags flex flex-wrap"></div>
+                <input class="inputSearch " data-trans="search" placeholder="Search...." value=""/>
+                <div class="tagsMainContainer flex">
+                    <button class="input " onclick="onSetFilter('all')"><a data-trans="all">All</a> <i class="fas fa-infinity"></i></button>
+                    <button class="input toggleTags " onclick="toggleTags()" ><a data-trans="moreTags">Show more</a> <i class="fas fa-toggle-on"></i></button>
+                    <div class="tagContainer">
+                        <div class="tags flex flex-wrap justify-content-center"></div>
+                    </div>
+                </div>
             </div>
+            <main class="pagination">
+                <navigation class="flex flex-space-between">
+                    <a class="next align-self-center" onclick="onPrevPage()" data-trans="BtnNextPage" > <i class="fas fa-arrow-left"></i> Prev Page</a>
+                    <a class="previus align-self-center" onclick="onNextPage()" data-trans="BtnPrevPage">Next Page <i class="fas fa-arrow-right"></i></a>
+                </navigation>
+            </main>
             <div class="images flex justify-content-center flex-wrap"></div>
     </gallery>
 
-    <main class="container" >
-        <navigation class="flex flex-space-between">
-            <a class="previus" onclick="onPrevPage()" data-trans="BtnNextPage" > <i class="fas fa-arrow-left"></i> Prev Page</a>
-            <a class="next" onclick="onNextPage()" data-trans="BtnPrevPage">Next Page <i class="fas fa-arrow-right"></i></a>
-        </navigation>
-    </main>
-
-    <section id="editMain" class="container">
+    <section id="editPage" class="container flex flex-direction-column">
+        <h2 class="h2PageTitle h2-margin-top" data-trans="editor">Editor</h2>
         <div class="canvas-container flex justify-content-center flex-align-center">
-                <div class="canvas"> 
+                <div class="canvas align-self-start"> 
                     <canvas id="canvas-meme" class="canvas-meme" width="750" height="500">                     
                     </canvas>            
                 </div>          
             <div class="actions flex flex-direction-column">
                 <div class="actions-header flex flex-direction-row flex-space-between">
-                    <h2  data-trans="editTextLines">Edit Text Lines</h2> 
+                    <h3  data-trans="editTextLines">Edit Text Lines</h3> 
                     <div class="ButtonsFontSize flex">
                         <button onclick="onSwitchLines()"><i class="fas fa-arrows-alt-v"></i></button>
                         <button onclick="onAddLine()" class="addLine"><i class="far fa-plus-square"></i></button>
@@ -87,9 +90,9 @@
                     </div> 
 
                     <div class="flex">
-                        <button onclick="onTextAlign('right')"><i class="fas fa-align-left"></i></i></button>
-                        <button onclick="onTextAlign('center')"><i class="fas fa-align-center"></i></i></button>
-                        <button onclick="onTextAlign('left')"><i class="fas fa-align-right"></i></i></button>
+                        <button onclick="onTextAlign('right')"><i class="fas fa-align-left"></i></button>
+                        <button onclick="onTextAlign('center')"><i class="fas fa-align-center"></i></button>
+                        <button onclick="onTextAlign('left')"><i class="fas fa-align-right"></i></button>
                         <span class="line-seperation"></span>
                     </div>
 
@@ -101,21 +104,23 @@
                     </div>
                 </div>
                 <div class="inputs flex flex-direction-column">        
-                    <input class="input input-txt-first" data-inputid="" name="input-txt-first" value="some txt" placeHolder="some txt" />
-                    <input class="input input-txt-second" data-inputid="" name="input-txt-second" value="some txt" placeHolder="some txt" />
+                    <input class="input input-txt-first" data-inputid="0" name="input-txt-first" value="some txt" placeHolder="some txt" />
+                    <input class="input input-txt-second" data-inputid="1" name="input-txt-second" value="some txt" placeHolder="some txt" />
+               
                 </div>
                 <div class="stickers-container"> 
                     <div class="stickers flex flex-space-between flex-wrap"></div>
                 </div>
-                <div class="save flex flex-direction-column">  
+                <div class="save flex flex-direction-column">   
                     <label class="uploadFileLabel" for="uploadFile" data-trans="upload">Upload<i class="fas fa-file-upload"></i></label>
-                    <input type="file" id="uploadFile" class="file-input btn custom-file-input" placeholder="asdsa" name="image" onchange="onImgInput(event)" />
+                    <input type="file" id="uploadFile" class="file-input btn custom-file-input" placeholder="upload" name="image" onchange="onImgInput(event)" />
+                    <div class="share-container"></div>
                     <button class="input" onclick="onSaveMeme()" data-trans="save">Save<i class="fas fa-cloud-upload-alt"></i></button>
                     <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">                      
                         <button class="input fb" type="submit" data-trans="share">Share<i class="fab fa-facebook-square"></i></button>
                     </form>
                     <form action="" method="POST" enctype="multipart/form-data">                     
-                        <input name="img" id="imgData" type="hidden"/> <!---->
+                        <input name="img" id="imgData" type="hidden"/> 
                         <a href="#" class="button input save" onclick="downloadImg(this)" download="meme.jpg" data-trans="download">Download <i class="fas fa-save"></i></a>
                     </form>
                 </div>
@@ -123,27 +128,30 @@
         </div>
     </section>
 
-    <section  id="savedMain" class="savedMemes container">
-        <h2  data-trans="savedMemes">Saved Memes</h2>
+    <section  id="memesPage" class="savedMemes flex flex-direction-column container">
+        <h2 class="h2PageTitle h2-margin-top" data-trans="savedMemes">Saved Memes</h2>
         <div class="memes flex" ></div>
     </section>
 
-    <footer class="footer  flex flex-direction-column flex-align-center">
-        <div class="logo"><img src="img/logo.svg"></div>
+    <footer class="footer flex flex-direction-column flex-align-center">
+        <div class="logo bounce-in-top"><img src="img/logo.svg"></div>
         <p>By Harel Weingarten</p>
         <ul class="nav-link flex">
-            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-twitter"></i></i></a></li>
-            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-twitter"></i></i></a></li>
+            <li class="flex flex-align-center justify-content-center"> <a href="#"><i class="fab fa-facebook-f"></i> </a></li>
+            <li class="flex flex-align-center justify-content-center"> <a href="#"><i class="fab fa-twitter"></i> </a></li>
+            <li class="flex flex-align-center justify-content-center"> <a href="#"><i class="fab fa-instagram"></i> </a></li>
+            <li class="flex flex-align-center justify-content-center"> <a href="#"><i class="fab fa-tiktok"></i> </a></li>
         </ul>
     </footer>
 
     <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/upload-service.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/i18n-service.js"></script>
+
 </body>
 </html>

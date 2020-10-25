@@ -1,0 +1,164 @@
+/* responsive */
+
+@media only screen and (min-width: 720px) {
+    .container {
+        max-width: 620px;
+        margin: 0 auto 0;      
+    }
+
+    .main-nav-ul{
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .gallery .actions {
+        flex-direction: row;
+        min-height: 80px;
+    }
+
+    input.inputSearch {
+        width: 50%;
+    }
+
+    .tagsMainContainer {
+        /* width: 46%; */
+        flex-direction: row;
+    }
+
+    .tags{
+        top: -20px;
+        margin: 0 6px;
+        align-self: flex-end;
+    }
+
+    .tagsMainContainer .input{
+        margin: 0 6px;
+        align-self: flex-end;
+    }
+
+    .main-nav-ul {
+        flex-direction: row;
+    }
+  
+    footer p {
+        padding: 32px 0 0 0;
+    }
+
+    .ButtonsFontSize{
+        flex-wrap: wrap; 
+    }
+
+    /* hide mobile screen on desktop */
+    .screen{
+        visibility: hidden;
+    }
+    .menu-open .screen{
+        visibility: hidden;
+    }
+
+    /*.dropdown-content display for desktop only */
+    .dropdown:hover .dropdown-content{
+        display: block;
+        position: absolute;
+    }
+
+    .savedMemes .memes{
+        flex-wrap: nowrap;
+    }
+}
+
+@media only screen and (min-width: 920px) {
+    .container {
+        max-width: 700px;
+        margin: 0 auto 0;
+    }
+    
+    .gallery{
+        margin-top:10px
+    }
+
+}
+
+@media only screen and (min-width: 1020px) {
+    .container {
+        max-width: 1000px;
+        margin: 0 auto 0;
+    }
+    
+    .gallery{
+        margin-top:10px
+    }
+
+}
+
+@media only screen and (min-width: 1100px) {
+    .container {
+        max-width: 1000px;
+    }
+
+    .gallery{
+        margin-top:10px
+    }
+
+    .canvas-container{
+        flex-direction: row;
+    }
+
+    .canvas{
+        position: relative;
+        width: 50%;
+        max-width: 750px;
+        height: 500px;
+    }
+
+    .canvas-container .actions{
+        padding: 0 10px;
+        width: 50%;
+        max-width: 550px;
+        align-self: self-end;
+    }
+
+
+
+    .savedMemes .memes .canvasSaved{
+        position: relative;
+        width: 25%;
+        max-width: 250px;
+        height: 250px;
+    }
+
+}
+
+@media only screen and (min-width: 1210px) {
+    .container {
+        max-width: 1110px;
+    }
+}
+@media only screen and (max-width: 720px) {
+    .main-nav-ul {
+        flex-direction: column;
+        position: fixed;
+        right: 0;
+        top: 0;
+        background: #eaeaea;
+        width: 100%;
+        max-width: 0px;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        z-index: 99;
+    }
+
+    .main-nav-ul li a.link {
+        display: block; 
+        padding: 10px 40px;
+        border-bottom: 1px #fff solid;
+        width: 100%;
+    }
+
+    .menu-button {
+        visibility: visible;
+        display: block; 
+    }
+    
+}
