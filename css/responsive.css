@@ -26,26 +26,38 @@
     }
 
     .tags{
-        top: -20px;
+        /* top: -20px; */
         margin: 0 6px;
         align-self: flex-end;
+        max-width: initial;
+    }
+
+    .tagsMainContainer .buttons {
+        flex-direction: column;
     }
 
     .tagsMainContainer .input{
-        margin: 0 6px;
+        margin: 2px 6px;
         align-self: flex-end;
     }
 
     .main-nav-ul {
         flex-direction: row;
     }
-  
+
+    .save{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
     footer p {
         padding: 32px 0 0 0;
     }
 
     .ButtonsFontSize{
         flex-wrap: wrap; 
+        align-items: flex-start;
     }
 
     /* hide mobile screen on desktop */
@@ -60,6 +72,7 @@
     .dropdown:hover .dropdown-content{
         display: block;
         position: absolute;
+
     }
 
     .savedMemes .memes{
@@ -106,9 +119,10 @@
 
     .canvas{
         position: relative;
-        width: 50%;
+        min-width: 750px;
+        /* width: 50%;
         max-width: 750px;
-        height: 500px;
+        height: 500px; */
     }
 
     .canvas-container .actions{
@@ -117,8 +131,6 @@
         max-width: 550px;
         align-self: self-end;
     }
-
-
 
     .savedMemes .memes .canvasSaved{
         position: relative;
@@ -139,7 +151,7 @@
         flex-direction: column;
         position: fixed;
         right: 0;
-        top: 0;
+        top: 56px;
         background: #eaeaea;
         width: 100%;
         max-width: 0px;
@@ -161,4 +173,9 @@
         display: block; 
     }
     
+    /*.dropdown-content display for mobile only */
+    .drop-down-open .dropdown:hover .dropdown-content{
+        display: block;
+        width: 100%;
+    }
 }

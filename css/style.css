@@ -26,27 +26,37 @@
     max-width: 200px;
 }
 
+.menu-open .menu-button{
+    transform: rotate(90deg);
+}
+
 button , a {
     cursor: pointer;
 }
-.menu-button{
+.menu-button {
     visibility: hidden;
     display: none;
     font-size: 1.625rem;
     color: #c31819;
 }
 
+.menu-button:active ,.menu-button:visited{
+    color: #c31819;
+}
+
 .menu-button:hover{
-    color: #000;
+    color: #c31819;
 }
 
 .screen{
+    position: absolute;
+    top: 58px;
+    left: 0;
     visibility: hidden;
     opacity: 0;
     background: #0000005e;
     width: 100%;
     height: 100vh;
-    position: absolute;
     z-index: 99;
     transition: 1s ease-in-out;
 }
@@ -65,7 +75,7 @@ button , a {
 }
 
 .main-nav-ul li:last-of-type{
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 .main-nav-ul li a.link {
@@ -77,6 +87,7 @@ button , a {
     text-shadow: 1px 1px #fff; 
 }
 
+/* a hover */
 .main-nav-ul li a.link:hover{  
     color: #000;
 }
@@ -112,7 +123,7 @@ button , a {
 .dropdown-content {
     display: none;
     position: absolute;
-    top: 40px;
+    /* top: 40px; */
     min-width: 120px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 4px 6px;
@@ -142,10 +153,7 @@ button , a {
     color: #000
 }
 
-/*.dropdown-content display for mobile only */
-.drop-down-open .dropdown:hover .dropdown-content{
-    display: block;
-}
+
 
 /* logo */
 .logo{
@@ -192,21 +200,17 @@ img.imgMemeGallery {
     border-radius: 10px;
     width: 300px;
     height: auto;
-    /* max-width: 360px;
-    max-height: 225px;
-    width: auto;
-    height: auto; */
     object-fit: cover;
     -webkit-box-shadow: 0px 2px 16px 5px rgba(0,0,0,0.33); 
     box-shadow: 0px 2px 16px 5px rgba(0,0,0,0.33);
     cursor: pointer;
-    transition: width 1s, height 2s ,margin 2s;
+    transition: width 0.75s, margin 1.5s;
 }
 
   
 img.imgMemeGallery:hover {
-    margin: 30px;
-    width: 350px;
+    margin: 15px;
+    width: 320px;
 }
 
 navigation{
@@ -250,6 +254,12 @@ main.pagination {
     flex-direction: column;
 }
 
+.tagsMainContainer .buttons{
+    min-width: 160px;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .tagsMainContainer .input  {
     display: block;
     background: #efefef;
@@ -272,15 +282,17 @@ main.pagination {
 .tagContainer {
     position: relative;
     width: 100%;
-    margin: 0 20px;
+    margin: 0;
 }
 
 .tags{
     padding: 10px 10px;
-    max-height: 100px;
+    max-height: 108px;
     overflow: hidden;
     position: absolute;
     top: 0px;
+    left: 0;
+    right: 0;
     background: #f15f61e8;
     border-radius: 20px;
     text-shadow: 1px 1px #000;
@@ -288,6 +300,7 @@ main.pagination {
     color: #fff;
     border: 1px solid #9c9c9c;
     max-width: 350px;
+    margin: 0 auto;
 }
 
 /* canvas */
@@ -298,9 +311,11 @@ main.pagination {
 
 .canvas{
     position: relative;
-    width: 95%;
-    max-width: 750px;
-    height: 500px;
+    width: 100%;
+    min-height: 420px;
+    /* min-width: 750px; */
+    /* height: 500px;  */
+    margin: 0 0 40px;
 }
 
 .canvas-meme{
@@ -335,6 +350,10 @@ main.pagination {
     max-width: 750px;
 }
 
+.actions-header {
+    margin: 0 0 12px 0;
+}
+
 input{
     font-family: 'Roboto', sans-serif;
 }
@@ -347,13 +366,14 @@ input{
 
     color:#000;
     font-size: 1em;
-    padding: 10px 20px;
+    padding: 10px 12px;
     border: 1px solid #fff;
     border-bottom: 1px solid #DEDEDE;
     height: 50px;
     line-height: 25px;
     margin: 10px 0;
     text-shadow: 1px 1px #fff;
+    min-width: 126px;
 }
 
 .canvas-container .actions .input i , .uploadFileLabel i{
@@ -367,19 +387,24 @@ input{
 .canvas-container .actions h3{
     color: #727272;
     font-size: 1.5em;
+    margin: 0;
 }
 
 .ButtonsFontSize{
-    margin: 10px 0 0 0 ;
+    margin: 0 0 0 0 ;
     flex-wrap: wrap;
+}
+
+.ButtonsFontSize .rub{
+    margin-bottom: 10px;
 }
 
 .ButtonsFontSize button{
     font-family: georgia;
-    margin: 0px 10px 10px 0;
+    margin: 0px 10px 0px 0;
     background: white;
     text-align: center;
-    padding: 8px 0;
+    padding: 0px 0;
     border: 1px solid #fff;
     font-size: 1em;
     display: flex;
@@ -406,7 +431,7 @@ input.color-text {
     margin: 0 5px;
     background: white;
     padding: 0;
-    border: 1px solid #fff;
+    border: 1px solid #000;
 }
 
 .selectFont {
@@ -451,7 +476,7 @@ input.file-input{
     background: #efefef;
     border-radius: 3px;
     border-bottom: 1px solid #dedede;
-    padding: 13px 8px;
+    padding: 15px 8px;
     outline: none;
     white-space: nowrap;
     cursor: pointer;
@@ -459,6 +484,7 @@ input.file-input{
     font-weight: 100;
     font-size: 1em;
     text-align: center;
+    min-width: 126px;
 }
 
 .custom-file-input:hover::before {

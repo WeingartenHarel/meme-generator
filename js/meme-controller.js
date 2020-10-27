@@ -54,6 +54,7 @@ function renderEmojis(){
 
 function renderSavedMemes(){
     var memes = getSavedMemes()
+    console.log(memes)
     if(memes ===  undefined ||  memes === null) return
 
     // create canvas elements
@@ -135,6 +136,8 @@ function setActiveLink(btnName){
 // select meme from saved meme
 function selectMeme(index){
     updateGMemeFromSaved(index)
+    clearCanvas()
+    resetCanvas()
     renderCanvas()
 }
 
@@ -148,7 +151,18 @@ function onAddEmoji(el,src){
 function onSaveMeme(){
     if (!gCanvas) return;
     if(!confirm("Save Meme to server...?") || !gCanvas) return;
-    saveMeme();
+    
+    var meme = getGMeme();
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    console.log()
+    if(vw < 750){
+        //var rect = gCanvas.getBoundingClientRect(); // relative to canvas coordinates
+        saveMeme(true);
+        renderSavedMemes();
+        return
+    }
+
+    saveMeme(false);
     renderSavedMemes();
 }
 
@@ -180,12 +194,15 @@ function onTextAlign(align){
 
 // add text input (line)
 function onAddLine(){
-    var isCanvas = getSelectedLineIdx();
+    var isCanvas = gMeme;
     if(!isCanvas) return
     addLine();
     renderInputs();
+    addInputEventOnchange();
+    addInputEventOnfocus();
     setInputsFontSize();
     renderCanvas(); //render meme
+    //addCanvasEventListener()
 }
 
 // set inputs inital focus
@@ -367,6 +384,7 @@ function clearCanvas() {
 function renderCanvas(imgUpload){
     if(!gCtx) return;
     //clearCanvas(); // clear canvas for meme change
+    resizeCanvasByContainer
     drawImg(imgUpload);  //img
 }
 
@@ -439,7 +457,10 @@ function canvasOnMouseDown(ev) {
     var mouseDownOffsetY = ev.offsetY;
 
     // check click text
-    var checkClickedLine = gMeme.lines.find(line => {
+    var lines = getLines();
+    console.log ('lines',lines)
+    var checkClickedLine = lines.find(line => {
+        console.log(line)
         var lineTxtWidth = gCtx.measureText(line.txt).width;
         switch(line.align) {
             case 'left':
@@ -455,6 +476,7 @@ function canvasOnMouseDown(ev) {
     var mouseMoveOffsetY = 0;
 
     if(checkClickedLine){ 
+        console.log(checkClickedLine)
         var lineIndex =  getLineIdByTxt(checkClickedLine.txt)
         var elInput = document.querySelector(`[data-inputid="${lineIndex}"]`);
         elInput.focus();
@@ -506,6 +528,7 @@ function canvasOnTouchStart(ev) {
     var mouseDownOffsetX = ev.touches[0].clientX - rect.left;
     var mouseDownOffsetY = ev.touches[0].clientY - rect.top;
 
+    console.log(mouseDownOffsetX, mouseDownOffsetY)
        // check click text
     var checkClickedLine = gMeme.lines.find(line => {
         var lineTxtWidth = gCtx.measureText(line.txt).width;
@@ -521,7 +544,7 @@ function canvasOnTouchStart(ev) {
     })
 
     var [mouseMoveOffsetX , mouseMoveOffsetY] = [0,0];
-    console.log('line drag',mouseMoveOffsetX,mouseMoveOffsetY)
+    //console.log('line drag',mouseMoveOffsetX,mouseMoveOffsetY)
     if(checkClickedLine) {
         var lineIndex =  getLineIdByTxt(checkClickedLine.txt)
         var elInput = document.querySelector(`[data-inputid="${lineIndex}"]`);
@@ -531,7 +554,7 @@ function canvasOnTouchStart(ev) {
    
     function dragText(ev){  
         ev.preventDefault();
-        console.log(ev);    
+        //console.log(ev);    
         mouseMoveOffsetX = ev.touches[0].clientX - rect.left;
         mouseMoveOffsetY = ev.touches[0].clientY - rect.top;
         checkClickedLine.x = mouseMoveOffsetX;
@@ -574,12 +597,16 @@ function resizeCanvasByContainer() {
 
     var elContainer = document.querySelector('.canvas');    
     var elCanvasMeme = document.querySelector('.canvas-meme');
-    console.log(elContainer,elCanvasMeme)
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
+    console.log('vw',vw)
     //elContainer.style.height =  elContainer.offsetWidth * ratio +"px"// set 1:1 ratio to .canvas 
     //console.log("resize" , elContainer.offsetWidth ,ratio)
-    elCanvasMeme.width  = elContainer.offsetWidth 
-    elCanvasMeme.height = elContainer.offsetHeight
-
+    if(vw < 750){
+        elCanvasMeme.width  = elContainer.offsetWidth 
+        elCanvasMeme.height = elContainer.offsetWidth
+    }
+    //elContainer.height
     //if(!gCanvas) return 
     //renderCanvas(); //render meme
 }

@@ -2,6 +2,7 @@
 console.log('gallery service')
 
 const gImages = [
+    {id: 1, url: 'img/0.jpg', keywords: ['matrix' , 'politic']},
     {id: 1, url: 'img/1.jpg', keywords: ['trump' , 'politic']},
     {id: 2, url: 'img/2.jpg', keywords: ['baby' , 'funny' ]},
     {id: 3, url: 'img/3.jpg', keywords: ['tv', 'know' ]},
@@ -129,7 +130,7 @@ function getImages() { //ok
 
 function getImageUrl(){ //ok
     const image = getImageById(gMeme.selectedImgId)
-    console.log(image)
+    //console.log(image)
     return image.url;
 }
 

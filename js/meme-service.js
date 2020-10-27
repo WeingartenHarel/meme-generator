@@ -70,8 +70,12 @@ function addSticker(src){ //ok
     //console.log(sticker)
 }
  
-function saveMeme(){  // ok
+function saveMeme(isMobile){  // ok
     var meme = getGMeme();
+    if(isMobile){
+        meme.lines[0].x += 175
+        meme.lines[1].x += 175
+    }
     var clone = JSON.parse(JSON.stringify(meme));
     //console.log(result)
     gMemes.push(clone)
@@ -93,8 +97,8 @@ function addLine(){ // ok
     var meme = getGMeme();
     var line = _createLine();
     if(meme.lines.length > 3) return
-    meme.lines.push(line)
-    //console.log(meme);
+    gMeme.lines.push(line)
+    console.log(gMeme);
 }
 
 function updateLineColor(color){ //ok
@@ -133,6 +137,7 @@ function setSelectedLine(){ //ok
 }
 
 function setSelectedLineIdx(index){ //ok
+    console.log(index)
     gMeme.selectedLineIdx = index;
 }
 
@@ -298,14 +303,14 @@ function _createSticker(src){
 function _createLine(txt,size,align,color,font,fontSize,x,y){
     var line = {
         txt: 'We need more Coffee',
-        size: 22,
-        align: 'left',
+        size: 20,
+        align: 'center',
         color: 'white',
         colorStroke: 'black',
-        font: 'Ariel',
-        fontSize:'16px',
-        x:40,
-        y:40,
+        font: 'impact',
+        fontSize:30,
+        x:350,
+        y:50,
     };
     return line
 
