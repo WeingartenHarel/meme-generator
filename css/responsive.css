@@ -76,7 +76,7 @@
     }
 
     .savedMemes .memes{
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
     }
 }
 
@@ -120,9 +120,6 @@
     .canvas{
         position: relative;
         min-width: 750px;
-        /* width: 50%;
-        max-width: 750px;
-        height: 500px; */
     }
 
     .canvas-container .actions{
@@ -135,6 +132,7 @@
     .savedMemes .memes .canvasSaved{
         position: relative;
         width: 25%;
+        min-width: 250px;
         max-width: 250px;
         height: 250px;
     }

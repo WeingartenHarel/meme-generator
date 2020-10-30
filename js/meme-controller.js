@@ -12,7 +12,7 @@ let gFontSize = 22;
 let gFilterBy = 'ALL';
 let gCurrPage = 'galleryPage'
 const gPages = ['galleryPage','editPage','memesPage']
-
+var isUploaded = false;
 
 function init(){
     console.log('init')  
@@ -135,10 +135,17 @@ function setActiveLink(btnName){
 
 // select meme from saved meme
 function selectMeme(index){
+    isUploaded = false;
     updateGMemeFromSaved(index)
     clearCanvas()
     resetCanvas()
     renderCanvas()
+}
+
+function checkDefalutImage(){
+    var selectedImgId = getSelectedImgId()
+    var check =  (selectedImgId===1000)? true : false;
+    return check;
 }
 
 // add emoji to meme
@@ -147,11 +154,27 @@ function onAddEmoji(el,src){
     renderCanvas(); //render meme
 }
 
+function errorDisaply(){
+    var el = document.querySelector('.messegeError')
+    if(isUploaded){
+        el.style.visibility = 'visible';
+        el.innerHTML = 'Uploaded image cannot be saved (use download)'
+        return
+    }else{
+        var el = document.querySelector('.messegeError')
+        el.style.visibility = 'hidden';
+        el.innerHTML = ''
+    }
+}
+
 // save meme
 function onSaveMeme(){
     if (!gCanvas) return;
+    if (checkDefalutImage()) return
+    var error = errorDisaply(); 
+    if(error) return  
     if(!confirm("Save Meme to server...?") || !gCanvas) return;
-    
+
     var meme = getGMeme();
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     console.log()
@@ -165,6 +188,7 @@ function onSaveMeme(){
     saveMeme(false);
     renderSavedMemes();
 }
+
 
 // select text color
 function onSelectColor(color){

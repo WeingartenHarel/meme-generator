@@ -5,6 +5,7 @@ function initUpload(){
 
 function onImgInput(ev) {
     console.log('upload',ev)
+    isUploaded = true
     loadImageFromInput(ev, renderCanvas)
 
 }

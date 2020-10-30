@@ -22,7 +22,7 @@ const gEmojis = [
 
 
 var gMeme = {
-    selectedImgId: 1,
+    selectedImgId: 1000,
     selectedLineIdx: 0,
     lines: [
         {
@@ -243,6 +243,10 @@ function getSavedMemes(){ //ok
 
 function getSelectedLineIdx(){ //ok
     return gMeme.selectedLineIdx;
+}
+
+function getSelectedImgId(){
+    return gMeme.selectedImgId;
 }
 
 function getSelectedFontSize(inputIdx){ //ok

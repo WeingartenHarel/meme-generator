@@ -53,6 +53,10 @@ function onNextPage() {
 
 // select image for meme
 function selectImage(imageId){
+    isUploaded = false;
+    var error = errorDisaply(); 
+    if(error) return  
+    
     var canvas = gCanvas;
     updateGMeme(imageId);
     createCanvas();

@@ -505,6 +505,15 @@ img.emoji{
 
 .savedMemes .memes{
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* eroor messege */
+.messegeError {
+    visibility: hidden;
+    border: 1px solid #c3181a;
+    padding: 10px;
+    color: #c3181a;
 }
 
 /* footer */
